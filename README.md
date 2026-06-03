@@ -1,0 +1,2 @@
+# FazakasBoglarka
+Szakdolgozat

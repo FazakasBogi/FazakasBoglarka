@@ -1,0 +1,137 @@
+body {
+  font-family: Aptos, "Segoe UI", Tahoma, Arial, sans-serif;
+  margin: 0;
+  padding: 28px;
+  background: linear-gradient(180deg, #f8fafc 0%, #eef2ff 100%);
+  color: #111827;
+}
+
+.container {
+  max-width: 980px;
+  margin: 0 auto;
+  background: #ffffff;
+  border: 1px solid #e5e7eb;
+  border-radius: 14px;
+  padding: 20px 24px 18px;
+  box-shadow: 0 6px 20px rgba(15, 23, 42, 0.08);
+}
+
+h2 {
+  margin: 0;
+  font-size: 24px;
+  color: #0f172a;
+  letter-spacing: 0.2px;
+}
+
+#chart,
+#chartRate,
+#chartRespondents,
+#chartGender,
+#chartAge,
+#chartEducation,
+#chartEwasteAwareness,
+#chartValueMeans,
+#chartValueIntensity,
+#chartSmartphoneHandling,
+#chartEducationAttitude {
+  margin: 16px 0 14px;
+  width: 100%;
+  overflow: visible;
+}
+
+#chart .vega-embed,
+#chart .vega-embed > div,
+#chart canvas,
+#chart svg,
+#chartRate .vega-embed,
+#chartRate .vega-embed > div,
+#chartRate canvas,
+#chartRate svg,
+#chartRespondents .vega-embed,
+#chartRespondents .vega-embed > div,
+#chartRespondents canvas,
+#chartRespondents svg,
+#chartGender .vega-embed,
+#chartGender .vega-embed > div,
+#chartGender canvas,
+#chartGender svg,
+#chartAge .vega-embed,
+#chartAge .vega-embed > div,
+#chartAge canvas,
+#chartAge svg,
+#chartEducation .vega-embed,
+#chartEducation .vega-embed > div,
+#chartEducation canvas,
+#chartEducation svg,
+#chartEwasteAwareness .vega-embed,
+#chartEwasteAwareness .vega-embed > div,
+#chartEwasteAwareness canvas,
+#chartEwasteAwareness svg,
+#chartValueMeans .vega-embed,
+#chartValueMeans .vega-embed > div,
+#chartValueMeans canvas,
+#chartValueMeans svg,
+#chartValueIntensity .vega-embed,
+#chartValueIntensity .vega-embed > div,
+#chartValueIntensity canvas,
+#chartValueIntensity svg,
+#chartSmartphoneHandling .vega-embed,
+#chartSmartphoneHandling .vega-embed > div,
+#chartSmartphoneHandling canvas,
+#chartSmartphoneHandling svg,
+#chartEducationAttitude .vega-embed,
+#chartEducationAttitude .vega-embed > div,
+#chartEducationAttitude canvas,
+#chartEducationAttitude svg {
+  width: 100% !important;
+  max-width: 100%;
+}
+
+.section-title {
+  margin-top: 28px;
+}
+
+.chart-wrapper {
+  position: relative;
+}
+
+.chart-download-btn {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  width: 34px;
+  height: 34px;
+  border: 1px solid #cbd5e1;
+  border-radius: 8px;
+  background: #ffffff;
+  color: #1e293b;
+  font-size: 16px;
+  line-height: 1;
+  z-index: 5;
+  cursor: pointer;
+  transition: background-color 0.2s ease, transform 0.12s ease, box-shadow 0.2s ease;
+}
+
+.chart-download-btn:hover {
+  background: #eff6ff;
+  box-shadow: 0 2px 8px rgba(37, 99, 235, 0.2);
+}
+
+.chart-download-btn:active {
+  transform: translateY(1px);
+}
+
+@media (max-width: 900px) {
+  body {
+    padding: 14px;
+  }
+
+  .container {
+    padding: 14px;
+    border-radius: 10px;
+  }
+
+  h2 {
+    font-size: 20px;
+  }
+}

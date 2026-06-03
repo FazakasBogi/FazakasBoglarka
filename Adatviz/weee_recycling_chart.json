@@ -1,0 +1,111 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "title": {
+    "text": "WEEE újrahasznosítási arány alakulása",
+    "subtitle": "Hollandia, Románia és az EU-átlag összehasonlítása",
+    "anchor": "start",
+    "fontSize": 18,
+    "subtitleFontSize": 13,
+    "offset": 16
+  },
+  "data": {
+    "url": "weee_recycling%20rate.csv",
+    "format": {
+      "type": "csv",
+      "parse": {
+        "TIME_PERIOD": "number",
+        "OBS_VALUE": "number"
+      }
+    }
+  },
+  "transform": [
+    {
+      "filter": "datum.geo === 'Netherlands' || datum.geo === 'Romania' || datum.geo === 'European Union - 27 countries (from 2020)'"
+    },
+    {
+      "filter": "isValid(datum.OBS_VALUE)"
+    },
+    {
+      "calculate": "datum.geo === 'Netherlands' ? 'Hollandia' : datum.geo === 'Romania' ? 'Románia' : 'EU-átlag'",
+      "as": "GeoHu"
+    }
+  ],
+  "width": "container",
+  "height": 340,
+  "autosize": {
+    "type": "fit-x",
+    "contains": "padding"
+  },
+  "encoding": {
+    "x": {
+      "field": "TIME_PERIOD",
+      "type": "quantitative",
+      "title": "Év",
+      "axis": {
+        "format": "d",
+        "tickMinStep": 1,
+        "grid": false
+      }
+    },
+    "y": {
+      "field": "OBS_VALUE",
+      "type": "quantitative",
+      "title": "Újrahasznosítási arány (%)",
+      "axis": {
+        "grid": true,
+        "tickCount": 6
+      }
+    },
+    "color": {
+      "field": "GeoHu",
+      "type": "nominal",
+      "title": "Terület",
+      "scale": {
+        "domain": ["Hollandia", "Románia", "EU-átlag"],
+        "range": ["#F97316", "#2563EB", "#64748B"]
+      }
+    },
+    "tooltip": [
+      { "field": "GeoHu", "title": "Terület" },
+      { "field": "TIME_PERIOD", "title": "Év", "format": "d" },
+      { "field": "OBS_VALUE", "title": "Arány (%)", "format": ".1f" }
+    ]
+  },
+  "layer": [
+    {
+      "mark": {
+        "type": "line",
+        "strokeWidth": 3,
+        "point": true
+      }
+    },
+    {
+      "mark": {
+        "type": "point",
+        "filled": true,
+        "size": 70
+      }
+    }
+  ],
+  "config": {
+    "view": { "stroke": "#E5E7EB" },
+    "axis": {
+      "labelFontSize": 11,
+      "titleFontSize": 12,
+      "titleColor": "#374151",
+      "labelColor": "#4B5563",
+      "gridColor": "#E5E7EB"
+    },
+    "legend": {
+      "titleFontSize": 12,
+      "labelFontSize": 11,
+      "orient": "top",
+      "direction": "horizontal",
+      "symbolType": "stroke",
+      "symbolStrokeWidth": 3,
+      "labelColor": "#374151",
+      "titleColor": "#111827"
+    },
+    "background": "#FFFFFF"
+  }
+}

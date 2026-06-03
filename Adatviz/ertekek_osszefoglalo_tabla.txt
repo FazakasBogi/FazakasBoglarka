@@ -1,0 +1,128 @@
+﻿
+=== Románia ===
+
+E1 - Univerzalizmus: Környezeti aggodalom
+  Kitöltők: 126
+  Átlag: 5.02
+  Medián: 5
+  Módusz: 6
+  Szórás: 1.05
+  1-6 darabszám: 2, 1, 7, 21, 46, 49
+  5-6 együtt: 95 fő (75.4%)
+
+E2 - Jóindulat: Mások és jövő generációk védelme
+  Kitöltők: 126
+  Átlag: 5.01
+  Medián: 5
+  Módusz: 5
+  Szórás: 0.95
+  1-6 darabszám: 1, 2, 3, 25, 53, 42
+  5-6 együtt: 95 fő (75.4%)
+
+E3 - Konformitás: Közösségi szabályok követése
+  Kitöltők: 126
+  Átlag: 4.9
+  Medián: 5
+  Módusz: 5
+  Szórás: 1.06
+  1-6 darabszám: 0, 6, 5, 27, 46, 42
+  5-6 együtt: 88 fő (69.8%)
+
+E4 - Biztonság: Fenntartható társadalmi működés
+  Kitöltők: 126
+  Átlag: 5.46
+  Medián: 6
+  Módusz: 6
+  Szórás: 0.8
+  1-6 darabszám: 1, 0, 1, 11, 38, 75
+  5-6 együtt: 113 fő (89.7%)
+
+--- Tudás és edukációs attitűd ---
+
+T1 - Tudás: Mit lehet tenni egy elromlott, már nem használt okostelefonnal?
+  Eladom vagy odaadom valakinek: 93 fő (73.8%)
+  Leadom kijelölt e-hulladékgyűjtő ponton: 92 fő (73%)
+  Megjavíttatom, ha lehetséges: 68 fő (54%)
+  Elteszem a fiókba: 59 fő (46.8%)
+  Leadom mobilszolgáltatónál: 48 fő (38.1%)
+  Visszaviszem az üzletbe: 31 fő (24.6%)
+  Nem tudom: 2 fő (1.6%)
+  Kidobom a műanyag vagy papír szelektív gyűjtőbe: 1 fő (0.8%)
+  Kidobom a normál háztartási szemétbe: 1 fő (0.8%)
+
+T2 - Tudás: Hallott-e már az "e-hulladék" vagy WEEE fogalmáról?
+  Igen: 80 fő (63.5%)
+  Nem: 46 fő (36.5%)
+
+A1 - Attitűd az edukáció felé: Részt vett-e már e-hulladék edukációs programon vagy kezdeményezésen?
+  Nem: 112 fő (88.9%)
+  Igen: 14 fő (11.1%)
+
+A2 - Attitűd az edukáció felé: A 7. kérdésre nemmel válaszolók szívesen részt vennének-e hasonló eseményen?
+  Talán: 69 fő (61.6%)
+  Igen: 35 fő (31.2%)
+  Nem: 8 fő (7.1%)
+
+=== Hollandia ===
+
+E1 - Univerzalizmus: Környezeti aggodalom
+  Kitöltők: 59
+  Átlag: 4.68
+  Medián: 5
+  Módusz: 5
+  Szórás: 0.99
+  1-6 darabszám: 0, 2, 3, 20, 21, 13
+  5-6 együtt: 34 fő (57.6%)
+
+E2 - Jóindulat: Mások és jövő generációk védelme
+  Kitöltők: 59
+  Átlag: 4.95
+  Medián: 5
+  Módusz: 5
+  Szórás: 0.9
+  1-6 darabszám: 0, 1, 1, 16, 23, 18
+  5-6 együtt: 41 fő (69.5%)
+
+E3 - Konformitás: Közösségi szabályok követése
+  Kitöltők: 59
+  Átlag: 4.71
+  Medián: 5
+  Módusz: 5
+  Szórás: 1.07
+  1-6 darabszám: 0, 2, 5, 17, 19, 16
+  5-6 együtt: 35 fő (59.3%)
+
+E4 - Biztonság: Fenntartható társadalmi működés
+  Kitöltők: 59
+  Átlag: 5.12
+  Medián: 5
+  Módusz: 5
+  Szórás: 0.81
+  1-6 darabszám: 0, 0, 3, 7, 29, 20
+  5-6 együtt: 49 fő (83.1%)
+
+--- Tudás és edukációs attitűd ---
+
+T1 - Tudás: Mit lehet tenni egy elromlott, már nem használt okostelefonnal?
+  Leadom kijelölt e-hulladékgyűjtő ponton: 36 fő (61%)
+  Eladom vagy odaadom valakinek: 35 fő (59.3%)
+  Megjavíttatom, ha lehetséges: 31 fő (52.5%)
+  Elteszem a fiókba: 29 fő (49.2%)
+  Visszaviszem az üzletbe: 18 fő (30.5%)
+  Leadom mobilszolgáltatónál: 7 fő (11.9%)
+  Kidobom a műanyag vagy papír szelektív gyűjtőbe: 5 fő (8.5%)
+  Kidobom a normál háztartási szemétbe: 0 fő (0%)
+  Nem tudom: 0 fő (0%)
+
+T2 - Tudás: Hallott-e már az "e-hulladék" vagy WEEE fogalmáról?
+  Igen: 42 fő (71.2%)
+  Nem: 17 fő (28.8%)
+
+A1 - Attitűd az edukáció felé: Részt vett-e már e-hulladék edukációs programon vagy kezdeményezésen?
+  Nem: 47 fő (79.7%)
+  Igen: 12 fő (20.3%)
+
+A2 - Attitűd az edukáció felé: A 7. kérdésre nemmel válaszolók szívesen részt vennének-e hasonló eseményen?
+  Talán: 30 fő (63.8%)
+  Nem: 12 fő (25.5%)
+  Igen: 5 fő (10.6%)

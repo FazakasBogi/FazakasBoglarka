@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+    <meta charset="UTF-8">
+    <title>WEEE Adatvizualizáció</title>
+    <link rel="stylesheet" href="adatviz.css">
+</head>
+<body>
+
+<div class="container">
+    <h2>WEEE gyűjtés kategóriák szerint</h2>
+
+    <div class="chart-wrapper">
+        <button id="downloadChartBtn" class="chart-download-btn" type="button" aria-label="Első diagram letöltése" title="Diagram letöltése">⬇</button>
+        <div id="chart"></div>
+    </div>
+
+    <h2 class="section-title">WEEE újrahasznosítási arány (Hollandia, Románia, EU-átlag)</h2>
+
+    <div class="chart-wrapper">
+        <button id="downloadRateBtn" class="chart-download-btn" type="button" aria-label="Második diagram letöltése" title="Diagram letöltése">⬇</button>
+        <div id="chartRate"></div>
+    </div>
+
+    <h2 class="section-title">Demográfiai adatok a kérdőíves mintában</h2>
+
+    <div class="chart-wrapper">
+        <button id="downloadRespondentsBtn" class="chart-download-btn" type="button" aria-label="Kitöltők diagram letöltése" title="Diagram letöltése">⬇</button>
+        <div id="chartRespondents"></div>
+    </div>
+
+    <div class="chart-wrapper">
+        <button id="downloadGenderBtn" class="chart-download-btn" type="button" aria-label="Nemek diagram letöltése" title="Diagram letöltése">⬇</button>
+        <div id="chartGender"></div>
+    </div>
+
+    <div class="chart-wrapper">
+        <button id="downloadAgeBtn" class="chart-download-btn" type="button" aria-label="Kor szerinti diagram letöltése" title="Diagram letöltése">⬇</button>
+        <div id="chartAge"></div>
+    </div>
+
+    <div class="chart-wrapper">
+        <button id="downloadEducationBtn" class="chart-download-btn" type="button" aria-label="Végzettség diagram letöltése" title="Diagram letöltése">⬇</button>
+        <div id="chartEducation"></div>
+    </div>
+
+    <h2 class="section-title">Értékek, tudás és edukációs attitűd</h2>
+
+    <div class="chart-wrapper">
+        <button id="downloadEwasteAwarenessBtn" class="chart-download-btn" type="button" aria-label="E-hulladék tudatosság diagram letöltése" title="Diagram letöltése">⬇</button>
+        <div id="chartEwasteAwareness"></div>
+    </div>
+
+    <div class="chart-wrapper">
+        <button id="downloadValueMeansBtn" class="chart-download-btn" type="button" aria-label="Értékdimenziók diagram letöltése" title="Diagram letöltése">⬇</button>
+        <div id="chartValueMeans"></div>
+    </div>
+
+    <div class="chart-wrapper">
+        <button id="downloadValueIntensityBtn" class="chart-download-btn" type="button" aria-label="Értékintenzitás diagram letöltése" title="Diagram letöltése">⬇</button>
+        <div id="chartValueIntensity"></div>
+    </div>
+
+    <div class="chart-wrapper">
+        <button id="downloadSmartphoneHandlingBtn" class="chart-download-btn" type="button" aria-label="E-hulladék kezelés diagram letöltése" title="Diagram letöltése">⬇</button>
+        <div id="chartSmartphoneHandling"></div>
+    </div>
+
+    <div class="chart-wrapper">
+        <button id="downloadEducationAttitudeBtn" class="chart-download-btn" type="button" aria-label="Edukációs attitűd diagram letöltése" title="Diagram letöltése">⬇</button>
+        <div id="chartEducationAttitude"></div>
+    </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/vega@5"></script>
+<script src="https://cdn.jsdelivr.net/npm/vega-lite@5"></script>
+<script src="https://cdn.jsdelivr.net/npm/vega-embed@6"></script>
+<script src="adatviz.js"></script>
+
+</body>
+</html>

@@ -155,6 +155,24 @@
             <h2 id="secondary-title">Rendszerszintű háttér az országok összehasonlításához</h2>
           </div>
 
+          <div class="secondary-summary-panel" aria-label="Másodlagos adatok általános következtetései">
+            <article>
+              <span>01</span>
+              <h3>A rendszer és az attitűd egyszerre számít</h3>
+              <p>A WEEE-adatok az országos hulladékkezelési teljesítményt mutatják, az Eurobarometer pedig azt, hogy a lakosság milyen környezeti problémákat és beavatkozási lehetőségeket tart fontosnak.</p>
+            </article>
+            <article>
+              <span>02</span>
+              <h3>Románia és Hollandia eltérő kiindulópont</h3>
+              <p>Az összehasonlítás nem csak országok közti rangsor: azt is jelzi, hogy a primer kérdőíves válaszok különböző infrastrukturális és társadalmi háttérben értelmezhetők.</p>
+            </article>
+            <article>
+              <span>03</span>
+              <h3>Az e-hulladék a körforgásos átmenet látható pontja</h3>
+              <p>Az elektronikai és akkumulátorhulladék az Eurobarometerben is megjelenő aggodalom, miközben a WEEE-mutatók megmutatják, mennyire képes a rendszer ezt kezelhető árammá alakítani.</p>
+            </article>
+          </div>
+
           <div class="secondary-accordion">
             <details open>
               <summary>Eurostat WEEE adatok</summary>
@@ -165,6 +183,7 @@
                       <p class="kicker">Idősor</p>
                       <h3>WEEE mennyiségek termékkategóriánként</h3>
                     </div>
+                    <span>Eurostat CSV + Vega-Lite</span>
                   </div>
                   <div id="weeeCategoryTrend" class="vega-chart primary-vega" aria-live="polite"></div>
                   <p class="chart-note" id="weeeCategoryTrendNote"></p>
@@ -175,6 +194,7 @@
                       <p class="kicker">Újrahasznosítás</p>
                       <h3>Ráta trend Románia, Hollandia és EU között</h3>
                     </div>
+                    <span>Eurostat CSV + vonaldiagram</span>
                   </div>
                   <div id="weeeRecyclingTrend" class="vega-chart primary-vega" aria-live="polite"></div>
                   <p class="chart-note" id="weeeRecyclingTrendNote"></p>
@@ -185,6 +205,7 @@
                       <p class="kicker">Rangsor</p>
                       <h3>Újrahasznosítási ráta az utolsó romániai adatévben</h3>
                     </div>
+                    <span>Eurostat rangsor + szűrés</span>
                   </div>
                   <div id="weeeRecyclingRanking" class="vega-chart primary-vega" aria-live="polite"></div>
                   <p class="chart-note" id="weeeRecyclingRankingNote"></p>
@@ -193,9 +214,66 @@
             </details>
             <details>
               <summary>Eurobarometer attitűdök</summary>
-              <div class="secondary-text">
-                <p>Az Eurobarometer eredmények értelmezési hátteret adnak a kérdőívhez: a környezeti felelősség, a fogyasztói bizalom és a kényelmi akadályok együtt magyarázzák, miért nem elég az információ önmagában.</p>
-                <p>A primer adatoknál ezért külön nézzük a motivációkat, akadályokat és a leadási pontok ismeretét, mert ezek kötik össze az attitűdöt a tényleges viselkedéssel.</p>
+              <div class="secondary-chart-grid">
+                <article class="primary-chart primary-chart-wide">
+                  <div class="chart-heading">
+                    <div>
+                      <p class="kicker">Beágyazott kördiagram</p>
+                      <h3>QB1. Milyen mértékben ért egyet azzal, hogy a környezeti ügyek közvetlen hatással vannak a mindennapi életére és egészségére?</h3>
+                    </div>
+                    <span>Eurobarometer CSV + arc rétegek</span>
+                  </div>
+                  <div id="eurobarometerQb1NestedPie" class="vega-chart primary-vega" aria-live="polite"></div>
+                  <p class="chart-note" id="eurobarometerQb1NestedPieNote"></p>
+                </article>
+
+                <article class="primary-chart primary-chart-wide">
+                  <div class="chart-heading">
+                    <div>
+                      <p class="kicker">Oszlopdiagram</p>
+                      <h3>QB2T. Ön szerint mely intézkedések lennének a leghatékonyabbak a környezeti problémák kezelésében?</h3>
+                    </div>
+                    <span>Eurobarometer CSV + grouped bar</span>
+                  </div>
+                  <div id="eurobarometerQb2Columns" class="vega-chart primary-vega" aria-live="polite"></div>
+                  <p class="chart-note" id="eurobarometerQb2ColumnsNote"></p>
+                </article>
+
+                <article class="primary-chart">
+                  <div class="chart-heading">
+                    <div>
+                      <p class="kicker">Halmozott sáv</p>
+                      <h3>QB6. Mely lépéseket fontolná meg a hulladék mennyiségének csökkentésére?</h3>
+                    </div>
+                    <span>Többválaszos arány + stacked bar</span>
+                  </div>
+                  <div id="eurobarometerQb6Stacked" class="vega-chart primary-vega" aria-live="polite"></div>
+                  <p class="chart-note" id="eurobarometerQb6StackedNote"></p>
+                </article>
+
+                <article class="primary-chart">
+                  <div class="chart-heading">
+                    <div>
+                      <p class="kicker">Vonaldiagram</p>
+                      <h3>QB7T. Ön szerint mely hulladéktípusok jelentik a legnagyobb problémát az országában?</h3>
+                    </div>
+                    <span>Eurobarometer CSV + line chart</span>
+                  </div>
+                  <div id="eurobarometerQb7Dots" class="vega-chart primary-vega" aria-live="polite"></div>
+                  <p class="chart-note" id="eurobarometerQb7DotsNote"></p>
+                </article>
+
+                <article class="primary-chart primary-chart-wide">
+                  <div class="chart-heading">
+                    <div>
+                      <p class="kicker">100%-os sávdiagram</p>
+                      <h3>QB8. Hajlandó lenne többet fizetni könnyebben javítható, újrahasznosítható vagy fenntartható módon gyártott termékekért?</h3>
+                    </div>
+                    <span>Megoszlás + normalized stack</span>
+                  </div>
+                  <div id="eurobarometerQb8Share" class="vega-chart primary-vega" aria-live="polite"></div>
+                  <p class="chart-note" id="eurobarometerQb8ShareNote"></p>
+                </article>
               </div>
             </details>
           </div>
@@ -289,9 +367,12 @@
 
             <div class="demography-intro">
               <article class="source-card">
-                <div>
+                <div class="source-card-top">
+                  <div>
                   <p class="kicker">Kiinduló bontás</p>
                   <h3>Kitöltések száma az eredeti forrás szerint</h3>
+                  </div>
+                  <span class="chart-method-label">CSV aggregáció + Vega-Lite</span>
                 </div>
                 <div id="sourceBars" class="source-plot vega-chart" aria-live="polite"></div>
                 <p class="chart-note">Az ábra az eredeti kérdőívforrások elemszámát mutatja. Ebből látszik, hogy a későbbi elemzésnél miért szükséges a magyar és román kitöltéseket egy romániai mintaként kezelni.</p>
@@ -310,9 +391,10 @@
 
             <div class="comparison-panel">
               <div class="comparison-top">
-                <div>
+                <div class="comparison-title-block">
                   <p class="kicker">Összehasonlíthatóság</p>
                   <h3>Demográfiai attribútumok dinamikus összevetése</h3>
+                  <span class="chart-method-label">Kategóriaarányok + Cramér V</span>
                 </div>
                 <div class="segmented-control" id="attributeControls" aria-label="Demográfiai attribútum választása"></div>
               </div>
@@ -332,17 +414,78 @@
             <h2>Elemző vizualizációk a primer adatokból</h2>
           </div>
 
+          <details class="metric-method-panel">
+            <summary>Indexképzés</summary>
+            <div class="metric-method-content" aria-labelledby="metric-method-title">
+              <div>
+                <p class="kicker">Indexképzés</p>
+                <h3 id="metric-method-title">A skálaalapú dimenziók összeállítása</h3>
+                <p>
+                  Az alábbi csoportosítások ugyanazokkal a nevekkel szerepelnek a pókháló ábrán, a heatmapen,
+                  a hisztogramon, a gyertya diagramon és a klaszterprofilban. Az indexek 1-6-os skálakérdések
+                  átlagából készülnek; a termékspecifikus kérdéseknél a nagy háztartási gépek, személyes IT eszközök és kis eszközök
+                  válaszai külön is szűrhetők.
+                </p>
+              </div>
+              <div id="metricGroupingTable" class="metric-grouping-table" aria-live="polite"></div>
+            </div>
+          </details>
+
           <div class="primary-dashboard" aria-label="Primer adatok interaktív vizualizációi">
+            <div class="result-question-heading">
+              <span>01</span>
+              <h3>Milyen fogyasztói profilok és háttértényezők látszanak a két országban?</h3>
+              <p>Az ábrák az attitűdöket, viselkedési indexeket és a végzettség, lakhely, kereset szerepét kapcsolják össze.</p>
+            </div>
+
+            <article class="primary-chart primary-chart-wide profile-switch-chart">
+              <div class="chart-heading">
+                <div>
+                  <p class="kicker">Pókháló / heatmap</p>
+                  <h3>Körforgásos fogyasztói profil mintánként</h3>
+                </div>
+                <span>1-6-os Likert-indexekből képzett átlagprofil + heatmap</span>
+              </div>
+              <div class="chart-view-toggle profile-view-toggle" id="primaryProfileViewToggle" aria-label="Profilábra nézet választása">
+                <button class="active" type="button" data-view="radar">Pókháló</button>
+                <button type="button" data-view="heatmap">Heatmap</button>
+              </div>
+              <div class="radar-toolbar">
+                <label for="primaryRadarProduct">Termékkategória</label>
+                <select id="primaryRadarProduct"></select>
+              </div>
+              <div id="primaryRadarPanel" class="profile-view-panel active">
+                <div id="primaryRadar" class="radar-chart" aria-live="polite"></div>
+                <p class="chart-note" id="primaryRadarNote"></p>
+              </div>
+              <div id="primaryHeatmapPanel" class="profile-view-panel" hidden>
+                <div id="primaryHeatmap" class="vega-chart primary-vega" aria-live="polite"></div>
+              <p class="chart-note" id="primaryHeatmapNote"></p>
+              </div>
+            </article>
+
+            <article class="primary-chart primary-chart-wide">
+              <div class="chart-heading">
+                <div>
+                  <p class="kicker">Gyertya diagram</p>
+                  <h3>Indexek szórása, mediánja és kvartilisei</h3>
+                </div>
+                <span>Kvartilisek + min-max tartomány</span>
+              </div>
+              <div id="primaryCandles" class="vega-chart primary-vega" aria-live="polite"></div>
+              <p class="chart-note" id="primaryCandlesNote"></p>
+            </article>
+
             <article class="primary-chart primary-chart-wide">
               <div class="chart-heading">
                 <div>
                   <p class="kicker">Heatmap</p>
-                  <h3>Életciklus-indexek átlaga mintánként</h3>
+                  <h3>Mely attitűdök járnak együtt a körforgásos döntésekkel?</h3>
                 </div>
-                <span>Pandas aggregáció logika + Vega-Lite szűrők</span>
+                <span>Pearson r együttjárási mutató</span>
               </div>
-              <div id="primaryHeatmap" class="vega-chart primary-vega" aria-live="polite"></div>
-              <p class="chart-note" id="primaryHeatmapNote"></p>
+              <div id="primaryCorrelation" class="vega-chart primary-vega" aria-live="polite"></div>
+              <p class="chart-note" id="primaryCorrelationNote"></p>
             </article>
 
             <article class="primary-chart">
@@ -351,6 +494,7 @@
                   <p class="kicker">Hisztogram</p>
                   <h3>Skálaválaszok eloszlása</h3>
                 </div>
+                <span>Likert-sávok + Vega-Lite + attitűdvonal</span>
               </div>
               <div id="primaryHistogram" class="vega-chart primary-vega" aria-live="polite"></div>
               <p class="chart-note" id="primaryHistogramNote"></p>
@@ -362,54 +506,108 @@
                   <p class="kicker">Buborék diagram</p>
                   <h3>Javítási és felelős leadási hajlandóság társadalmi háttér szerint</h3>
                 </div>
+                <span>Aggregált csoportok + bubble plot</span>
               </div>
               <div id="primaryBubble" class="vega-chart primary-vega" aria-live="polite"></div>
               <p class="chart-note" id="primaryBubbleNote"></p>
             </article>
 
-            <article class="primary-chart primary-chart-wide">
-              <div class="chart-heading">
-                <div>
-                  <p class="kicker">Gyertya diagram</p>
-                  <h3>Indexek szórása, mediánja és kvartilisei</h3>
-                </div>
-              </div>
-              <div id="primaryCandles" class="vega-chart primary-vega" aria-live="polite"></div>
-              <p class="chart-note" id="primaryCandlesNote"></p>
-            </article>
+            <div class="result-question-heading">
+              <span>02</span>
+              <h3>Milyen akadályok és motivációk alakítják a javítási és leadási döntéseket?</h3>
+              <p>Ez a rész a többválaszos kérdések alapján mutatja meg, mi tartja vissza és mi ösztönzi a fogyasztókat.</p>
+            </div>
 
             <article class="primary-chart primary-chart-wide">
               <div class="chart-heading">
                 <div>
-                  <p class="kicker">Korreláció</p>
-                  <h3>Likert-indexek kapcsolati hálója</h3>
+                  <p class="kicker">Oszlopdiagramok</p>
+                  <h3>Akadályok és motivációk együtt olvasva</h3>
                 </div>
-                <span>SciPy Pearson-logika a Python pipeline-ban</span>
+                <span>Többválaszos arányok + nézetváltó</span>
               </div>
-              <div id="primaryCorrelation" class="vega-chart primary-vega" aria-live="polite"></div>
-              <p class="chart-note" id="primaryCorrelationNote"></p>
+              <div class="paired-chart-grid">
+                <div class="paired-chart-panel">
+                  <h4>Akadályok</h4>
+                  <div class="chart-view-toggle" id="primaryBarrierViewToggle" aria-label="Akadályok ábranézet választása">
+                    <button class="active" type="button" data-view="top">Top nézet</button>
+                    <button type="button" data-view="compare">Országösszevetés</button>
+                  </div>
+                  <div id="primaryBarrierChoice" class="vega-chart primary-vega compact-vega" aria-live="polite"></div>
+                </div>
+                <div class="paired-chart-panel">
+                  <h4>Motivációk</h4>
+                  <div class="chart-view-toggle" id="primaryMotivationViewToggle" aria-label="Motivációk ábranézet választása">
+                    <button class="active" type="button" data-view="top">Top nézet</button>
+                    <button type="button" data-view="compare">Országösszevetés</button>
+                  </div>
+                  <div id="primaryMotivationChoice" class="vega-chart primary-vega compact-vega" aria-live="polite"></div>
+                </div>
+              </div>
+              <p class="chart-note" id="primaryBarrierMotivationNote"></p>
+            </article>
+
+            <div class="result-question-heading">
+              <span>03</span>
+              <h3>Mi történik az eszközökkel az életciklus végén?</h3>
+              <p>Az ábrák a leadópont-ismeretet, a tényleges leadási utakat és a javított eszközök elfogadását kapcsolják össze.</p>
+            </div>
+
+            <article class="primary-chart primary-chart-wide">
+              <div class="chart-heading">
+                <div>
+                  <p class="kicker">Kördiagram</p>
+                  <h3>Tudják-e a válaszadók, hol van a legközelebbi leadópont?</h3>
+                </div>
+                <span>q27 megoszlás + két ország pie chart</span>
+              </div>
+              <div id="primaryDropoffKnowledge" class="vega-chart primary-vega" aria-live="polite"></div>
             </article>
 
             <article class="primary-chart">
               <div class="chart-heading">
                 <div>
-                  <p class="kicker">KMeans profil</p>
+                  <p class="kicker">Oszlopdiagram</p>
+                  <h3>Az eszközök tényleges útja az életciklus végén</h3>
+                </div>
+                <span>Kategóriaarányok + nézetváltó</span>
+              </div>
+              <div class="chart-view-toggle" id="primaryDisposalViewToggle" aria-label="Leadási utak ábranézet választása">
+                <button class="active" type="button" data-view="top">Top nézet</button>
+                <button type="button" data-view="compare">Országösszevetés</button>
+              </div>
+              <div id="primaryDisposalPath" class="vega-chart primary-vega" aria-live="polite"></div>
+              <p class="chart-note" id="primaryDisposalPathNote"></p>
+            </article>
+
+            <article class="primary-chart">
+              <div class="chart-heading">
+                <div>
+                  <p class="kicker">Oszlopdiagram</p>
+                  <h3>Hibátlan és apró hibás eszközök elfogadása</h3>
+                </div>
+                <span>q22-q23 átlag + grouped bar</span>
+              </div>
+              <div id="primaryRepairQuality" class="vega-chart primary-vega" aria-live="polite"></div>
+              <p class="chart-note" id="primaryRepairQualityNote"></p>
+            </article>
+
+            <div class="result-question-heading">
+              <span>04</span>
+              <h3>Milyen fogyasztói csoportok rajzolódnak ki az adatokból?</h3>
+              <p>A klaszterezés feltáró módon mutatja meg, milyen válaszadói mintázatok különülnek el a képzett indexek alapján.</p>
+            </div>
+
+            <article class="primary-chart primary-chart-wide">
+              <div class="chart-heading">
+                <div>
+                  <p class="kicker">Vonaldiagram</p>
                   <h3>Válaszadói szegmensek átlagos mintázata</h3>
                 </div>
+                <span>Feltáró modell, nem előre megadott csoportosítás</span>
               </div>
               <div id="primaryClusterProfile" class="vega-chart primary-vega" aria-live="polite"></div>
-              <p class="chart-note" id="primaryClusterProfileNote"></p>
-            </article>
-
-            <article class="primary-chart">
-              <div class="chart-heading">
-                <div>
-                  <p class="kicker">Többválaszos kérdések</p>
-                  <h3>Akadályok, motivációk és leadási utak</h3>
-                </div>
-              </div>
-              <div id="primaryMultiChoice" class="vega-chart primary-vega" aria-live="polite"></div>
-              <p class="chart-note" id="primaryMultiChoiceNote"></p>
+              <div class="chart-note kmeans-note" id="primaryClusterProfileNote"></div>
             </article>
           </div>
 
@@ -473,6 +671,31 @@
     <script src="https://cdn.jsdelivr.net/npm/vega-lite@5"></script>
     <script src="https://cdn.jsdelivr.net/npm/vega-embed@6"></script>
     <script src="../figures/demography-altair.js"></script>
+    <script src="charts/primary-radar.js"></script>
+    <script src="charts/primary-heatmap.js"></script>
+    <script src="charts/primary-histogram.js"></script>
+    <script src="charts/primary-bubble.js"></script>
+    <script src="charts/primary-candles.js"></script>
+    <script src="charts/primary-correlation.js"></script>
+    <script src="charts/primary-barriers-motivations.js"></script>
+    <script src="charts/primary-disposal-path.js"></script>
+    <script src="charts/primary-repair-quality.js"></script>
+    <script src="charts/primary-kmeans.js"></script>
+    <script src="charts/secondary-weee-category.js"></script>
+    <script src="charts/secondary-recycling-trend.js"></script>
+    <script src="charts/secondary-recycling-ranking.js"></script>
+    <script src="charts/secondary-eurobarometer.js"></script>
+    <script src="js/config.js"></script>
+    <script src="js/data-utils.js"></script>
+    <script src="js/demography.js"></script>
+    <script src="js/primary-processing.js"></script>
+    <script src="js/primary-profile-charts.js"></script>
+    <script src="js/primary-social-algorithm-charts.js"></script>
+    <script src="js/primary-choice-charts.js"></script>
+    <script src="js/primary-main.js"></script>
+    <script src="js/secondary-visualizations.js"></script>
+    <script src="js/app-data.js"></script>
+    <script src="js/canvas-nav.js"></script>
     <script src="script.js"></script>
   </body>
 </html>

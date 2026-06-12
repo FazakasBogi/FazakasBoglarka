@@ -1553,7 +1553,7 @@ h3 {
 }
 
 .conclusion-section {
-  overflow: visible;
+  overflow: hidden;
 }
 
 .insight-grid {
@@ -1606,22 +1606,16 @@ h3 {
 }
 
 .final-message {
-  position: sticky;
-  bottom: clamp(24px, 7vh, 72px);
-  z-index: 8;
   display: grid;
   align-content: center;
-  max-width: 1040px;
-  min-height: min(48vh, 520px);
-  margin: clamp(140px, 32vh, 340px) auto clamp(60px, 12vh, 140px);
-  padding: clamp(28px, 5vw, 64px);
+  min-height: min(78vh, 760px);
+  margin-top: clamp(46px, 8vw, 96px);
+  padding: clamp(32px, 7vw, 82px);
   border-radius: var(--radius);
   color: #f6f4ea;
   background:
-    linear-gradient(135deg, rgba(18, 31, 27, 0.9), rgba(36, 92, 69, 0.82)),
-    rgba(18, 31, 27, 0.86);
-  box-shadow: 0 28px 80px rgba(18, 31, 27, 0.34);
-  backdrop-filter: blur(14px);
+    linear-gradient(135deg, rgba(36, 92, 69, 0.96), rgba(47, 127, 123, 0.88)),
+    var(--forest);
 }
 
 .final-message .kicker {

@@ -25,6 +25,15 @@ if (typeof window.loadSecondaryData === "function") {
   window.loadSecondaryData();
 }
 
+document.querySelectorAll(".literature-grid details").forEach((details) => {
+  details.addEventListener("toggle", () => {
+    if (!details.open) return;
+    document.querySelectorAll(".literature-grid details").forEach((item) => {
+      if (item !== details) item.open = false;
+    });
+  });
+});
+
 if (typeof window.updateActiveNav === "function") {
   window.addEventListener("scroll", window.updateActiveNav, { passive: true });
   window.addEventListener("resize", window.updateActiveNav);

@@ -173,12 +173,16 @@ function downloadChartImage(scope) {
   const cloned = sourceSvg.cloneNode(true);
   const viewBox = cloned.getAttribute("viewBox")?.split(/\s+/).map(Number);
   const rect = sourceSvg.getBoundingClientRect();
-  const width = Math.max(720, Math.round(viewBox?.[2] || rect.width || 900));
-  const height = Math.max(360, Math.round(viewBox?.[3] || rect.height || 520));
-  cloned.setAttribute("x", "40");
-  cloned.setAttribute("y", "96");
-  cloned.setAttribute("width", String(width));
-  cloned.setAttribute("height", String(height));
+  const chartWidth = Math.max(320, Math.round(viewBox?.[2] || rect.width || 900));
+  const chartHeight = Math.max(240, Math.round(viewBox?.[3] || rect.height || 520));
+  const exportChartWidth = Math.max(1120, chartWidth);
+  const scale = exportChartWidth / chartWidth;
+  const exportChartHeight = Math.round(chartHeight * scale);
+  cloned.setAttribute("width", String(chartWidth));
+  cloned.setAttribute("height", String(chartHeight));
+  if (!cloned.getAttribute("viewBox")) {
+    cloned.setAttribute("viewBox", `0 0 ${chartWidth} ${chartHeight}`);
+  }
 
   const style = `
     .radar-grid-shape{fill:none;stroke:rgba(36,92,69,.16);stroke-width:1}
@@ -187,8 +191,8 @@ function downloadChartImage(scope) {
     .radar-series{fill-opacity:.16;stroke-width:3;stroke-linejoin:round}
     text{font-family:Segoe UI,Arial,sans-serif}
   `;
-  const totalWidth = width + 80;
-  const totalHeight = height + 136;
+  const totalWidth = exportChartWidth + 80;
+  const totalHeight = exportChartHeight + 136;
   const serializedChart = new XMLSerializer().serializeToString(cloned);
   const exportSvg = `
     <svg xmlns="http://www.w3.org/2000/svg" width="${totalWidth}" height="${totalHeight}" viewBox="0 0 ${totalWidth} ${totalHeight}">
@@ -196,7 +200,9 @@ function downloadChartImage(scope) {
       <rect width="100%" height="100%" fill="#ffffff"/>
       <text x="40" y="42" fill="#1d2522" font-size="24" font-weight="800">${escapeXml(title)}</text>
       ${method ? `<text x="40" y="68" fill="#52635d" font-size="13" font-weight="700">${escapeXml(method)}</text>` : ""}
-      ${serializedChart}
+      <g transform="translate(40 96) scale(${scale})">
+        ${serializedChart}
+      </g>
     </svg>
   `;
 

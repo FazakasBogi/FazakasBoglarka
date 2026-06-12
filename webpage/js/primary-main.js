@@ -5,6 +5,7 @@ function renderPrimaryVisualizations(rows) {
   // 3. minden primer ábra renderelése a fenti aggregációkból.
   const primaryRows = enrichedPrimaryRows(rows);
   renderMetricGroupingTable();
+  renderPrimaryOverviewCharts(primaryRows);
   setupPrimaryProfileToggle(primaryRows);
   if (primaryRadarProduct) {
     primaryRadarProduct.onchange = () => renderPrimaryRadar(primaryRows);
@@ -15,10 +16,15 @@ function renderPrimaryVisualizations(rows) {
   renderPrimaryCorrelation(primaryRows);
   renderPrimaryHistogram(primaryRows);
   renderPrimaryBubble(primaryRows);
+  renderPrimaryUsedPurchase(primaryRows);
+  renderPrimaryAlternativeConsumption(primaryRows);
+  renderPrimaryRepairWillingness(primaryRows);
   renderPrimaryBarrierMotivation(primaryRows);
   renderPrimaryDropoffKnowledge(primaryRows);
   renderPrimaryDisposalPath(primaryRows);
+  renderPrimaryFutureDisposal(primaryRows);
   renderPrimaryRepairQuality(primaryRows);
+  renderPrimarySelfRepair(primaryRows);
   renderPrimaryClusterProfile(primaryRows);
   setupChartDownloadButtons();
 }
@@ -46,10 +52,18 @@ function setupPrimaryProfileToggle(primaryRows) {
         panel.classList.toggle("active", active);
       });
       if (productToolbar) {
-        productToolbar.hidden = selected === "heatmap";
+        productToolbar.hidden = false;
+      }
+      if (primaryRadarProduct) {
+        primaryRadarProduct.disabled = selected === "heatmap";
+        if (selected === "heatmap") {
+          primaryRadarProduct.value = "Minden";
+        }
       }
       if (selected === "heatmap") {
         renderPrimaryHeatmap(primaryRows);
+      } else {
+        renderPrimaryRadar(primaryRows);
       }
     };
   });

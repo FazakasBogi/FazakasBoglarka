@@ -86,7 +86,7 @@ function renderPrimaryRadar(rows) {
   </svg>`;
 
   if (primaryNotes.radar) {
-    primaryNotes.radar.textContent = "A pókháló ábra a két minta átlagos körforgásos fogyasztói profilját mutatja 1-6-os skálán. Minden tengely egy index: minél kijjebb fut a vonal, annál magasabb az adott dimenzió átlaga. A termékkategória-szűrőnél a termékspecifikus kérdések az adott eszköztípus alapján számolódnak, míg az általános attitűd és felelős leadási hajlandóság változatlan marad. Következtetésem: az ábra nem egy-egy kérdés különbségét, hanem a teljes profil formáját teszi láthatóvá; ahol az egyik minta vonala tartósan kijjebb fut, ott erősebb körforgásos nyitottság látszik.";
+    primaryNotes.radar.textContent = "A két ország fogyasztói profilja összességében hasonló, azonban a romániai válaszadók a legtöbb dimenzióban valamivel magasabb értékeket mutatnak. A legnagyobb eltérés a megosztási modellek iránti nyitottságban figyelhető meg, míg több területen csak minimális különbség látható. A kisebb eltérések részben a kérdőíves válaszadási szokások országspecifikus különbségeiből is adódhatnak.";
   }
 }
 
@@ -178,7 +178,7 @@ function renderPrimaryHeatmap(rows) {
 
   const strongest = [...values].filter((item) => Number.isFinite(item.atlag)).sort((a, b) => b.atlag - a.atlag)[0];
   if (primaryNotes.heatmap && strongest) {
-    primaryNotes.heatmap.textContent = `A heatmap színei az 1-6-os skálák összesített átlagát jelzik. A termékkategória-választás itt szándékosan ki van kapcsolva, mert ez a nézet a két ország teljes indexprofilját mutatja. Következtetésem: a legerősebb átlag a(z) ${strongest.dimenzio.toLowerCase()} dimenziónál látszik a(z) ${strongest.minta.toLowerCase()} csoportban, ezért ezt a dimenziót érdemes a fogyasztói körforgásos nyitottság egyik fő jelének tekinteni.`;
+    primaryNotes.heatmap.textContent = "Az attitűdök és a körforgásos viselkedések között többnyire gyenge vagy mérsékelt kapcsolat figyelhető meg. A legerősebb összefüggés a jövőbeni felelős leadási hajlandóság és a környezeti értékek között jelenik meg, ami arra utal, hogy a pozitív attitűdök elsősorban a hosszabb távú szándékokat befolyásolják. A tényleges fogyasztói döntéseket ugyanakkor más tényezők is jelentősen alakíthatják.";
   }
 }
 
@@ -267,6 +267,6 @@ function renderPrimaryHistogram(rows) {
   });
 
   if (primaryNotes.histogram) {
-    primaryNotes.histogram.textContent = "A hisztogram a kiválasztott mutató és termékkategória mintán belüli százalékos eloszlását mutatja. A szaggatott vonal minden nézetben a környezeti attitűd eloszlását húzza be referenciaként, így látható, hogy az adott viselkedési index eloszlása mennyire követi vagy tér el az általános környezeti attitűdtől.";
+    primaryNotes.histogram.textContent = "Az interaktív szűrők segítségével összehasonlíthatók az egyes országok és termékkategóriák válaszmintázatai. Az ábra nemcsak az átlagokat mutatja meg, hanem azt is, hogy a válaszadók mennyire egységesen vagy megosztottan viszonyulnak az adott körforgásos viselkedéshez. A szaggatott vonalak a környezeti attitűdök eloszlását jelenítik meg referenciaként, így látható, hogy az egyes viselkedési dimenziók mennyiben követik vagy térnek el az általános értékrendtől.";
   }
 }

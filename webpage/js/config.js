@@ -41,6 +41,13 @@ const primaryMotivationViewToggle = document.querySelector("#primaryMotivationVi
 const primaryDisposalViewToggle = document.querySelector("#primaryDisposalViewToggle");
 const metricGroupingTable = document.querySelector("#metricGroupingTable");
 const primaryCharts = {
+  valueDimensions: document.querySelector("#primaryValueDimensions"),
+  brokenPhoneDisposal: document.querySelector("#primaryBrokenPhoneDisposal"),
+  educationProgram: document.querySelector("#primaryEducationProgram"),
+  usedPurchase: document.querySelector("#primaryUsedPurchase"),
+  alternativeConsumption: document.querySelector("#primaryAlternativeConsumption"),
+  repairWillingness: document.querySelector("#primaryRepairWillingness"),
+  futureDisposal: document.querySelector("#primaryFutureDisposal"),
   radar: document.querySelector("#primaryRadar"),
   heatmap: document.querySelector("#primaryHeatmap"),
   histogram: document.querySelector("#primaryHistogram"),
@@ -53,8 +60,16 @@ const primaryCharts = {
   dropoffKnowledge: document.querySelector("#primaryDropoffKnowledge"),
   disposalPath: document.querySelector("#primaryDisposalPath"),
   repairQuality: document.querySelector("#primaryRepairQuality"),
+  selfRepair: document.querySelector("#primarySelfRepair"),
 };
 const primaryNotes = {
+  valueDimensions: document.querySelector("#primaryValueDimensionsNote"),
+  brokenPhoneDisposal: document.querySelector("#primaryBrokenPhoneDisposalNote"),
+  educationProgram: document.querySelector("#primaryEducationProgramNote"),
+  usedPurchase: document.querySelector("#primaryUsedPurchaseNote"),
+  alternativeConsumption: document.querySelector("#primaryAlternativeConsumptionNote"),
+  repairWillingness: document.querySelector("#primaryRepairWillingnessNote"),
+  futureDisposal: document.querySelector("#primaryFutureDisposalNote"),
   radar: document.querySelector("#primaryRadarNote"),
   heatmap: document.querySelector("#primaryHeatmapNote"),
   histogram: document.querySelector("#primaryHistogramNote"),
@@ -62,9 +77,11 @@ const primaryNotes = {
   candles: document.querySelector("#primaryCandlesNote"),
   correlation: document.querySelector("#primaryCorrelationNote"),
   clusterProfile: document.querySelector("#primaryClusterProfileNote"),
-  barrierMotivation: document.querySelector("#primaryBarrierMotivationNote"),
+  barrierChoice: document.querySelector("#primaryBarrierChoiceNote"),
+  motivationChoice: document.querySelector("#primaryMotivationChoiceNote"),
   disposalPath: document.querySelector("#primaryDisposalPathNote"),
   repairQuality: document.querySelector("#primaryRepairQualityNote"),
+  selfRepair: document.querySelector("#primarySelfRepairNote"),
 };
 const secondaryCharts = {
   categoryTrend: document.querySelector("#weeeCategoryTrend"),
@@ -166,6 +183,16 @@ const attributes = [
     label: "Háztartásméret",
     order: ["1 fő (egyedül élek)", "2 fő", "3-4 fő", "5 vagy több fő"],
   },
+  {
+    key: "household_income_eur",
+    label: "Jövedelem",
+    order: ["600 € alatt", "600–1 000 €", "1 001–1 600 €", "1 601–2 400 €", "2 400 € felett", "Nem kívánok válaszolni"],
+  },
+  {
+    key: "occupation",
+    label: "Foglalkozás",
+    order: ["Tanuló / Hallgató", "Alkalmazott", "Vállalkozó", "Háztartásbeli", "Munkanélküli / Álláskereső"],
+  },
 ];
 
 const scaleMetrics = [
@@ -216,6 +243,7 @@ const metricQuestionTexts = {
   q23_willing_after_imperfect_repair_large_household: "Mennyire vagy hajlandó egy elektronikai eszközt megjavíttatva, viszont kisebb fennmaradó hibák mellett tovább használni? Nagy háztartási gépek.",
   q23_willing_after_imperfect_repair_personal_it: "Mennyire vagy hajlandó egy elektronikai eszközt megjavíttatva, viszont kisebb fennmaradó hibák mellett tovább használni? Személyes IT eszközök.",
   q23_willing_after_imperfect_repair_small: "Mennyire vagy hajlandó egy elektronikai eszközt megjavíttatva, viszont kisebb fennmaradó hibák mellett tovább használni? Kis eszközök.",
+  q21_fix_minemr_yourself: "Hajlandó lennél kisebb hibát önállóan megjavítani?",
   q30_willing_future_disposal: "A jövőben hajlandó lennél-e többet tenni az elektronikai eszközeid megfelelő leadásáért?",
 };
 

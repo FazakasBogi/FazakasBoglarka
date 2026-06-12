@@ -106,6 +106,8 @@ function renderProfileCards(rows) {
         "Főiskola / Egyetemi diploma (BA/BSc)",
         "Mesterképzés vagy magasabb (MA/MSc/PhD)",
       ]),
+      higherIncome: share(groupRows, "household_income_eur", ["1 601–2 400 €", "2 400 € felett"]),
+      students: share(groupRows, "occupation", ["Tanuló / Hallgató"]),
     };
   });
 
@@ -120,6 +122,8 @@ function renderProfileCards(rows) {
             <div><dt>18-24 évesek</dt><dd>${formatPercent(metric.young)}</dd></div>
             <div><dt>Városi válaszadók</dt><dd>${formatPercent(metric.urban)}</dd></div>
             <div><dt>Felsőfokú végzettség</dt><dd>${formatPercent(metric.higher)}</dd></div>
+            <div><dt>Magasabb jövedelem</dt><dd>${formatPercent(metric.higherIncome)}</dd></div>
+            <div><dt>Tanuló / hallgató</dt><dd>${formatPercent(metric.students)}</dd></div>
           </dl>
         </article>
       `
@@ -400,7 +404,7 @@ function renderConclusions(rows) {
     <article>
       <span class="conclusion-number">${metrics.meanV.toFixed(2)}</span>
       <h3>Átlagos gyakorlati hatás</h3>
-      <p>Az öt demográfiai változó átlagos Cramér V értéke ${effectLabel}. A mintanagyság aránya: ${sampleRatio.toFixed(1)}x.</p>
+      <p>A ${metrics.effects.length} demográfiai változó átlagos Cramér V értéke ${effectLabel}. A mintanagyság aránya: ${sampleRatio.toFixed(1)}x.</p>
     </article>
     ${renderCramerBreakdown(metrics)}
   `;

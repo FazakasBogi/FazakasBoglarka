@@ -98,11 +98,7 @@ function renderPrimaryBubble(rows) {
     };
   });
   if (primaryNotes.bubble) {
-    const comparison = countryAverages
-      .filter((item) => Number.isFinite(item.repair) && Number.isFinite(item.disposal))
-      .map((item) => `${item.group}: javítás ${item.repair.toFixed(2)}, felelős leadás ${item.disposal.toFixed(2)}`)
-      .join("; ");
-    primaryNotes.bubble.textContent = `A diagramon minden buborék egy országon belüli végzettség-jövedelem-lakhely csoportot jelöl. Az átlagos javítási hajlandóságot a q16 termékkategória szerinti mezőiből számoltam: "Minden" esetén a három kategória átlaga, külön szűrőnél csak az adott terméktípus értéke szerepel. Az átlagos felelős leadási hajlandóság a q30 1-6-os skálája. A buborék mérete a legördülő szerint végzettséget, keresetet vagy lakhelytípust mutat. Következtetésem: azok a csoportok érdekesek igazán, amelyek egyszerre magas javítási és leadási hajlandóságot mutatnak; ${comparison}.`;
+    primaryNotes.bubble.textContent = "A javítási és felelős leadási hajlandóság különböző társadalmi háttércsoportok között nem mutat egyértelmű mintázatot. A pontok jelentős átfedése arra utal, hogy sem a lakóhely, sem a jövedelmi helyzet, sem más vizsgált háttérváltozó nem áll erős kapcsolatban ezekkel a körforgásos viselkedési formákkal.";
   }
 }
 
@@ -188,7 +184,7 @@ function renderPrimaryCandles(rows) {
   });
 
   if (primaryNotes.candles) {
-    primaryNotes.candles.textContent = "A gyertya-diagram nem csak átlagot mutat: a vonal a minimum-maximum tartományt, a test a középső 50%-ot, a jelölés pedig a mediánt. A termékkategória-szűrővel látható, hogy ugyanaz a dimenzió nagy, személyes IT vagy kis eszközöknél mennyire szóródik. Következtetésem: ahol a gyertya teste rövidebb, ott egységesebb a válaszadói gondolkodás; ahol hosszabb, ott a minta megosztottabb.";
+    primaryNotes.candles.textContent = "A legtöbb dimenzióban a válaszok a skála felső részében koncentrálódnak, ami erős körforgásos attitűdökre utal. A legnagyobb megosztottság a bérlési és megosztási modellek elfogadottságában figyelhető meg, míg a környezeti attitűdök és a felelős leadási szándék mindkét országban viszonylag egységesek.";
   }
 }
 
@@ -313,27 +309,10 @@ function renderPrimaryClusterProfile(rows) {
   });
 
   if (primaryNotes.clusterProfile) {
-    const clusterSummaries = Object.entries(clusters)
-      .map(([cluster, clusterRows]) => {
-        const metricAverages = scaleMetrics
-          .map((metric) => ({
-            label: metric.label,
-            value: mean(clusterRows.map((row) => row[metric.key])),
-          }))
-          .filter((item) => Number.isFinite(item.value))
-          .sort((a, b) => b.value - a.value);
-        const strongest = metricAverages.slice(0, 2).map((item) => `${item.label.toLowerCase()} (${item.value.toFixed(2)})`).join(", ");
-        const weakest = metricAverages.slice(-2).reverse().map((item) => `${item.label.toLowerCase()} (${item.value.toFixed(2)})`).join(", ");
-        return `<li><strong>${cluster}</strong> (${clusterRows.length} fő): legerősebb dimenziói: ${strongest}; gyengébb dimenziói: ${weakest}.</li>`;
-      })
-      .join("");
-
     primaryNotes.clusterProfile.innerHTML = `
-      <p><strong>Hogyan készült?</strong> A KMeans klaszterezés a válaszadók 1-6-os skálákból képzett életciklus-indexeire épül: környezeti attitűd, bérlés/megosztás nyitottsága, tartósság fontossága, javítási rutin, hibátlan javítás elfogadása, apró hibás javítás elfogadása és jövőbeni felelős leadási hajlandóság.</p>
-      <p>Csak azok a válaszadók kerültek a klaszterezésbe, akiknél ezekhez a dimenziókhoz elegendő skálaadat állt rendelkezésre. Az algoritmus három, egymáshoz belsőleg hasonló válaszadói profilt keresett; a megjelenített vonalak az egyes klaszterek átlagpontszámai a vizsgált dimenziók mentén.</p>
-      <p><strong>Klaszterprofilok.</strong></p>
-      <ul>${clusterSummaries}</ul>
-      <p><strong>Értelmezés.</strong> A klaszterek nem országok, demográfiai csoportok vagy előre megadott kategóriák, hanem viselkedési-attitűdbeli mintázatok. Következtetésem: ahol a vonalak több dimenzióban tartósan elkülönülnek, ott eltérő fogyasztói logikák látszanak: például óvatosabb, pragmatikusabb vagy körforgásosabban nyitott válaszadói profilok. Ez feltáró elemzés, ezért magyarázó irányt ad, de önmagában nem bizonyít oksági kapcsolatot.</p>
+      <p>A válaszadók csoportosítása K-means klaszterezéssel történt, amely egy gépi tanulási módszer az egymáshoz hasonló válaszminták azonosítására. Az elemzés három elkülönülő fogyasztói szegmenst rajzolt ki: egy körforgásos megoldásokra nyitott, egy átmeneti-pragmatikus és egy óvatosabb, inkább lineáris szemléletű csoportot.</p>
+      <p>A <strong>„Körforgásos nyitott”</strong> klaszter magas értékeket mutat a legtöbb körforgásos viselkedési mutató esetében, míg az <strong>„Óvatos lineáris”</strong> csoport jellemzően visszafogottabb ezekben a dimenziókban. Az <strong>„Átmeneti pragmatikus”</strong> klaszter a két véglet között helyezkedik el, ami arra utal, hogy a fogyasztói magatartás inkább egy folytonos skálán, mintsem élesen elkülönülő kategóriákban értelmezhető.</p>
+      <p>A klaszterek kialakulása azt jelzi, hogy a körforgásos viselkedés mögött nem egyetlen tényező áll. A pozitív környezeti attitűd fontos alapot jelent, azonban a gyakorlati döntéseket valószínűleg a gazdasági, kényelmi és infrastrukturális feltételek is jelentősen befolyásolják.</p>
     `;
   }
 }

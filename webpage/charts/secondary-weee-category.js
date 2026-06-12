@@ -2,13 +2,13 @@ window.chartSpecifications = window.chartSpecifications || {};
 
 window.chartSpecifications.secondaryWeeeCategory = {
   id: "weeeCategoryTrend",
-  title: "WEEE mennyiségek termékkategóriánként",
-  type: "Vega-Lite grouped bar chart",
+  title: "WEEE begyűjtött mennyiségek országonként és termékkategóriánként",
+  type: "Vega-Lite mennyiségi halmozott oszlopdiagram",
   data: "Eurostat WEEE mennyiségi adatok.",
   algorithm: [
-    "Ország, év és termékkategória szerint szűrt mennyiségeket jelenít meg.",
-    "Románia és Hollandia közvetlenül összehasonlítható.",
-    "Az ábra a rendelkezésre álló korábbi évektől indul.",
+    "Ország, év és termékkategória szerint szűri a begyűjtött WEEE mennyiségeket.",
+    "Évenként külön romániai és holland oszlopot rajzol.",
+    "Az oszlopokon belül a termékkategóriák mennyiségei halmozódnak.",
   ],
-  note: "A mennyiségek nem arányok, ezért az országméret és gyűjtési rendszer különbségeit is figyelembe kell venni.",
+  note: "Az ábra abszolút begyűjtött mennyiségeket mutat, ezért az országméret és a gyűjtési rendszer különbségeit is figyelembe kell venni.",
 };

@@ -1,52 +1,89 @@
 function renderWeeeCategoryTrend(rows) {
-  // ÁBRA: "WEEE mennyiségek termékkategóriánként".
-  // Adatelőkészítés: Eurostat/WEEE CSV; a JS országnevet egységesít és hiányzó értékeket szűr.
-  // Renderelés: Vega-Lite grouped column chart kategória-szűrővel.
+  // ÁBRA: "WEEE begyűjtött mennyiségek országonként és termékkategóriánként".
+  // Adatelőkészítés: Eurostat/WEEE CSV; a JS országnevet és kategórianevet egységesít.
+  // Renderelés: Vega-Lite mennyiségi, országonként egymás melletti stacked column chart.
   const countryMap = {
     Romania: "Románia",
     Netherlands: "Hollandia",
   };
+  const categoryMap = {
+    "Large devices": "Nagy eszközök",
+    "Personal devices": "Személyes IT eszközök",
+    "Small devices": "Kis eszközök",
+  };
+  const categoryOrder = ["Nagy eszközök", "Személyes IT eszközök", "Kis eszközök"];
   const values = rows
     .map((row) => ({
-      kategoria: normalize(row.Category),
+      kategoria: categoryMap[normalize(row.Category)] || normalize(row.Category),
       orszag: countryMap[normalize(row.Country)] || normalize(row.Country),
       ev: toNumber(row.Year),
       ertek: toNumber(row.Value),
     }))
-    .filter((row) => ["Hollandia", "Románia"].includes(row.orszag) && Number.isFinite(row.ev) && Number.isFinite(row.ertek));
-  const categories = [...new Set(values.map((row) => row.kategoria))];
+    .filter((row) => ["Hollandia", "Románia"].includes(row.orszag) && Number.isFinite(row.ev) && Number.isFinite(row.ertek))
+    .map((row) => ({
+      ...row,
+      sorozat: `${row.orszag} - ${row.kategoria}`,
+      kategoriaSorrend: categoryOrder.indexOf(row.kategoria),
+    }));
+  const seriesOrder = [
+    "Hollandia - Nagy eszközök",
+    "Hollandia - Személyes IT eszközök",
+    "Hollandia - Kis eszközök",
+    "Románia - Nagy eszközök",
+    "Románia - Személyes IT eszközök",
+    "Románia - Kis eszközök",
+  ];
+  const seriesColors = [
+    "#245c45",
+    "#2f7f7b",
+    "#8fb8a9",
+    "#b66f45",
+    "#d6a84f",
+    "#edc783",
+  ];
 
   embedPrimary(secondaryCharts.categoryTrend, {
-    ...primaryBaseSpec(values, 360),
-    params: [
-      { name: "kategoriaSzuro", value: categories[0], bind: { input: "select", options: categories, name: "Kategória: " } },
-    ],
-    transform: [{ filter: "datum.kategoria == kategoriaSzuro" }],
+    ...primaryBaseSpec(values, 390),
     mark: { type: "bar", cornerRadiusEnd: 4 },
     encoding: {
       x: { field: "ev", type: "ordinal", title: "Év", sort: [2019, 2020, 2021, 2022, 2023] },
-      y: { field: "ertek", type: "quantitative", title: "WEEE mennyiség" },
-      xOffset: { field: "orszag", type: "nominal" },
-      color: { field: "orszag", type: "nominal", title: "Ország", scale: { domain: ["Románia", "Hollandia"], range: [COMPARISON_COLORS.romania, COMPARISON_COLORS.netherlands] } },
+      xOffset: { field: "orszag", type: "nominal", title: "Ország", sort: ["Hollandia", "Románia"] },
+      y: {
+        field: "ertek",
+        type: "quantitative",
+        title: "Begyűjtött e-hulladék (tonna)",
+        stack: "zero",
+        axis: { format: "~s" },
+      },
+      color: {
+        field: "sorozat",
+        type: "nominal",
+        title: null,
+        scale: { domain: seriesOrder, range: seriesColors },
+        legend: { columns: 3, labelLimit: 180 },
+      },
+      order: {
+        field: "kategoriaSorrend",
+        type: "quantitative",
+      },
       tooltip: [
         { field: "orszag", title: "Ország" },
-        { field: "kategoria", title: "Kategória" },
         { field: "ev", title: "Év" },
-        { field: "ertek", title: "Érték", format: "," },
+        { field: "kategoria", title: "Termékkategória" },
+        { field: "ertek", title: "Begyűjtött mennyiség", format: "," },
       ],
     },
   });
 
   const latestYear = Math.max(...values.map((row) => row.ev));
   const latest = values.filter((row) => row.ev === latestYear).sort((a, b) => b.ertek - a.ertek)[0];
-  const firstYear = Math.min(...values.map((row) => row.ev));
   if (secondaryNotes.categoryTrend && latest) {
-    secondaryNotes.categoryTrend.textContent = `Az oszlopdiagram a WEEE mennyiségek változását mutatja termékkategóriánként, a rendelkezésre álló legkorábbi évvel, ${firstYear}-cel indítva. Az évenként egymás mellé tett oszlopok Románia és Hollandia összehasonlítását segítik. A holland adatsor 2023-ig, a román adatsor 2021-ig tart; ebből az következik, hogy Romániánál az utolsó évek hiányát óvatosan kell kezelni.`;
+    secondaryNotes.categoryTrend.textContent = "A két ország hasonló népessége ellenére Hollandia minden kategóriában több e-hulladékot gyűjt be. A különbség különösen a kis elektronikai eszközök esetében jelentős, ahol a holland rendszer lényegesen nagyobb mennyiséget képes formálisan begyűjteni. Ez arra utal, hogy a körforgásos gazdaság sikerében nemcsak a feldolgozás minősége, hanem a fogyasztók részvétele és a begyűjtési infrastruktúra fejlettsége is meghatározó.";
   }
 }
 
 function renderWeeeRecyclingTrend(rows) {
-  // ÁBRA: "Ráta trend Románia, Hollandia és EU között".
+  // ÁBRA: "WEEE újrahasznosítási ráta alakulása".
   // Adatelőkészítés: Eurostat újrahasznosítási CSV; üres cella = hiányzó adat, nem nulla.
   // Renderelés: Vega-Lite vonaldiagram.
   const countryMap = {
@@ -81,8 +118,7 @@ function renderWeeeRecyclingTrend(rows) {
   const latestYear = Math.max(...values.map((row) => row.ev));
   const latest = values.filter((row) => row.ev === latestYear).sort((a, b) => b.rata - a.rata);
   if (secondaryNotes.recyclingTrend && latest.length) {
-    const romanianLast = values.filter((row) => row.orszag === "Románia").sort((a, b) => b.ev - a.ev)[0];
-    secondaryNotes.recyclingTrend.textContent = `A vonaldiagram az újrahasznosítási rátát követi, de az üres romániai 2022-es és 2023-as rekordokat nem rajzolja nullaként, hanem hiányzó adatként kezeli. Románia utolsó elérhető rátája ${romanianLast.ev}-ben ${romanianLast.rata.toFixed(1)}%; ebből az következik, hogy a 2022-2023-as holland és EU-adatokkal már nem közvetlenül összevethető román pont.`;
+    secondaryNotes.recyclingTrend.textContent = "A holland rendszer stabil, míg Romániában nagyobb ingadozás figyelhető meg. Az EU-27 átlag a vizsgált időszakban viszonylag kiegyensúlyozottan alakult, Hollandia pedig jellemzően ehhez közeli értékeket mutatott. Románia több évben is megközelítette vagy meghaladta az uniós átlagot, ami a begyűjtött hulladék hatékony feldolgozására utal.";
   }
 }
 
@@ -134,7 +170,7 @@ function renderWeeeRecyclingRanking(rows) {
   const romania = values.find((row) => row.orszag === "Romania");
   const netherlands = values.find((row) => row.orszag === "Netherlands");
   if (secondaryNotes.recyclingRanking && romania && netherlands) {
-    secondaryNotes.recyclingRanking.textContent = `A rangsor nem 2023-at, hanem ${latestYear}-et használja, mert ez az utolsó év, ahol Romániának is van újrahasznosítási rátaadata. Magyarország nincs külön kiemelve; a fókusz Románia, Hollandia és az EU-27 összevetése. Hollandia és Románia különbsége ebben az évben ${Math.abs(netherlands.rata - romania.rata).toFixed(1)} százalékpont, ami arra utal, hogy a primer minták országos hulladékkezelési háttere eltérő.`;
+    secondaryNotes.recyclingRanking.textContent = `A magas újrahasznosítási ráta önmagában nem jelenti a rendszer sikerességét. Románia ${latestYear}-ben magasabb WEEE-újrahasznosítási rátát ért el, mint Hollandia, ugyanakkor ez kizárólag a már begyűjtött hulladék kezelésének hatékonyságát mutatja. Az eredmény arra utal, hogy Romániában nem az újrahasznosítás minősége, hanem elsősorban a begyűjtés alacsony szintje jelenti a kihívást.`;
   }
 }
 
@@ -270,7 +306,7 @@ function renderEurobarometerQb1(rows) {
   });
 
   if (secondaryNotes.eurobarometerQb1NestedPie) {
-    secondaryNotes.eurobarometerQb1NestedPie.textContent = "A beágyazott kördiagram három koncentrikus gyűrűben mutatja ugyanazt a kérdést: belül az EU-27, középen Románia, kívül Hollandia. Az országnevek a gyűrűk felső pontján jelennek meg; az összesítő egyetért és nem ért egyet sorokat nem rajzolja ki, mert azok duplikált kategóriák.";
+    secondaryNotes.eurobarometerQb1NestedPie.textContent = "A környezeti problémák jelentőségét mindkét ország lakossága magasra értékeli. A holland válaszadók körében különösen magas azok aránya, akik teljes mértékben egyetértenek azzal, hogy a környezeti ügyek közvetlen hatással vannak mindennapi életükre.";
   }
 }
 
@@ -296,7 +332,7 @@ function renderEurobarometerQb2(rows) {
   });
 
   if (secondaryNotes.eurobarometerQb2Columns) {
-    secondaryNotes.eurobarometerQb2Columns.textContent = "Az oszlopdiagram a QB2T összesített kérdést használja, vagyis az első négy választás együtt jelenik meg. Ez a forma jól mutatja, hogy Románia, Hollandia és az EU-átlag mely környezetpolitikai eszközöket tartja inkább hatékonynak.";
+    secondaryNotes.eurobarometerQb2Columns.textContent = "Mindhárom minta a körforgásos gazdaságot tartja az egyik leghatékonyabb megoldásnak. Ugyanakkor a hangsúlyok eltérnek: Hollandiában nagyobb támogatást kapnak a technológiai és innovációs megoldások, míg Romániában az oktatás és a lakossági tájékoztatás szerepe jelenik meg erősebben.";
   }
 }
 
@@ -327,7 +363,7 @@ function renderEurobarometerQb6(rows) {
   });
 
   if (secondaryNotes.eurobarometerQb6Stacked) {
-    secondaryNotes.eurobarometerQb6Stacked.textContent = "A QB6 többválaszos kérdés, ezért a halmozott sávok összege meghaladhatja a 100%-ot. Ez nem hiba: azt mutatja, hogy egy ország válaszadói mennyi különböző hulladékcsökkentési lépést tartanak elképzelhetőnek egyszerre.";
+    secondaryNotes.eurobarometerQb6Stacked.textContent = "Hollandiában minden vizsgált területen nagyobb a cselekvési hajlandóság. Különösen a szelektív hulladékgyűjtés és az újrahasználható csomagolások alkalmazása esetében figyelhető meg jelentős különbség a román és holland válaszadók között.";
   }
 }
 
@@ -352,7 +388,7 @@ function renderEurobarometerQb7(rows) {
   });
 
   if (secondaryNotes.eurobarometerQb7Dots) {
-    secondaryNotes.eurobarometerQb7Dots.textContent = "A vonaldiagram válaszkategóriánként köti össze Románia, Hollandia és az EU-átlag arányait, így jobban látható az országprofilok lefutása. A műanyag hulladék jellemzően magas, az elektronikai és akkumulátorhulladék pedig közvetlenül kapcsolódik a dolgozat e-hulladék fókuszához.";
+    secondaryNotes.eurobarometerQb7Dots.textContent = "Az elektronikai hulladék egyik országban sem számít a legfontosabb problémának. A válaszadók elsősorban a műanyag- és vegyszerhulladékot tekintik a legsúlyosabb környezeti kihívásnak, míg az e-hulladék jóval kisebb figyelmet kap.";
   }
 }
 
@@ -377,7 +413,7 @@ function renderEurobarometerQb8(rows) {
   });
 
   if (secondaryNotes.eurobarometerQb8Share) {
-    secondaryNotes.eurobarometerQb8Share.textContent = "A 100%-os sávdiagram azt mutatja, milyen arányban jelenik meg az igen, nem és bizonytalan válasz a fenntarthatóbb, javíthatóbb vagy újrahasznosíthatóbb termékekért fizetendő felárnál. Ez közvetlen hidat ad a primer kutatás vásárlási és javítási hajlandósági kérdéseihez.";
+    secondaryNotes.eurobarometerQb8Share.textContent = "A fenntarthatóbb termékekért való többletfizetés elfogadottsága jelentősen eltér az országok között. A holland válaszadók körében jóval magasabb a fizetési hajlandóság, míg Romániában a megkérdezettek kevesebb mint fele vállalna magasabb árat.";
   }
 }
 

@@ -2,7 +2,7 @@ window.chartSpecifications = window.chartSpecifications || {};
 
 window.chartSpecifications.secondaryRecyclingTrend = {
   id: "weeeRecyclingTrend",
-  title: "Újrahasznosítási ráta trend",
+  title: "WEEE újrahasznosítási ráta alakulása",
   type: "Vega-Lite line chart",
   data: "Eurostat WEEE recycling rate adatok.",
   algorithm: [
